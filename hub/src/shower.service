@@ -1,0 +1,13 @@
+[Unit]
+Description=shower monitor service
+After=network.target
+
+[Service]
+User=root
+Restart=always
+RestartSec=3
+
+ExecStart=/usr/bin/python /home/jzc/hub/main.py
+
+[Install]
+WantedBy=multi-user.target
