@@ -47,10 +47,12 @@ if __name__ == '__main__':
       print("W: interrupt received, stopping")
       serialThread.endSerial()
       shower_head_thread.endBluetooth()
+      shower_scale_thread.endBluetooth()
 
    except Exception as error:
       serialThread.endSerial()
       shower_head_thread.endBluetooth()
+      shower_scale_thread.endBluetooth()
       print(repr(error))
 
    finally:

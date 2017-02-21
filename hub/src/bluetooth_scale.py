@@ -1,3 +1,5 @@
+from __future__ import print_function
+from influx_poster import database_post
 from threading import Thread
 from time import sleep, time
 import datetime
@@ -27,8 +29,19 @@ class bluetoothManager_scale(Thread):
                 if (count < 2): 
                     count = count + 1
                 else:
-                    output = output + line[36:].replace(" ", "").strip()
-                    print(output)       
+                    output = line[36:].replace(" ", "").strip()
+                    output = output.decode('hex')
+                    output = output.replace(",kg,", "")
+                    value = output.rstrip()
+                    tag = "scale"
+                    dbpost = database_post(tag, value)
+                    dbpost.start()
+                    timestamp = datetime.datetime.now()
+                    timestring = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+                    with open("/home/jzc/logs/scale.csv", "a") as csvfile: 
+                        showerwriter = csv.writer(csvfile, delimiter=',')
+                        showerwriter.writerow([timestring, tag, value])
+                            
                 if(self.exit) :
                     print("attempting exit")
                     process.kill()
