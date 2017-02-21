@@ -1,0 +1,14 @@
+
+[Unit]
+Description=shower api service
+After=network.target
+
+[Service]
+User=root
+Restart=always
+RestartSec=3
+
+ExecStart=/usr/bin/nodemon /home/jzc/api/app.js
+
+[Install]
+WantedBy=multi-user.target
