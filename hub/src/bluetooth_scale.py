@@ -17,10 +17,12 @@ class bluetoothManager_scale(Thread):
         self.exit = 0
  
     def endBluetooth(self): 
+        print("ending scale")
         self.exit = 1
 
     def run(self):
         try:
+            print("started scale")
             count = 0
             process = subprocess.Popen("exec /usr/bin/gatttool -b EB:3D:C2:2D:A5:F4 -t random --char-write-req -a 0x0025 -n 0100 --listen", shell=True, stdout=subprocess.PIPE)
             count2 = 0

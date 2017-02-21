@@ -17,9 +17,11 @@ class bluetoothManager_head(Thread):
  
     def endBluetooth(self): 
         self.exit = 1
+        print("ending shower head")
 
     def run(self):
         try:
+            print("started shower head")
             count = 0
             process = subprocess.Popen("exec /usr/bin/gatttool -b D0:4A:18:99:9E:9F -t random --char-write-req -a 0x23 -n 0100 --listen", shell=True, stdout=subprocess.PIPE)
             count2 = 0
