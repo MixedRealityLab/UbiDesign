@@ -31,8 +31,9 @@ class bluetoothManager_head(Thread):
                     if(count2 < 3):
                         output = output + line[36:].replace(" ", "").strip()
                         count2 = count2 + 1
-                        count2 = 0
+                        
                     else:
+                        count2 = 0
                         array1 = output.decode('hex').split('*')
                         array2 = [s for s in array1 if len(s) > 5]
                         for item in array2: 
