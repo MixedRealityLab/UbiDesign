@@ -2,7 +2,7 @@
 ## Components
 
 - 4 * 500g 4 wire wheastone bridge load cells
-- 16 * laser cut spacers
+- 16 * laser cut spacers // Laser cutter file #2
 - M3 nuts and bolts for attaching load cells // Hysun to confirm lengths
 - 2 * laser cut perspex top plate // Laser cutter file #1
 - 1 * 3D printed box lid // STL and inventor file #2
