@@ -45,7 +45,7 @@
 - Solder JST wire assmbly to battery
 - program RFµ328 using wireless things voyager in serial socket mode and arduno IDE, flash firmware file shower_mointor.ino
 
-### Attach electronics to enclosure electronics
+### Attach electronics to enclosure 
 - Place thermal paste on body of temperature sensor probe end and attach to copper pipe using insulation tape
 - Attach flow sensor input end to copper pipe using 15mm push fit to 0.5" BSP plastic adapter, put PTFE tape on threads
 - Thread shower hose through bottom hole of enclosure and attach to output of flow sensor making sure 0.5" washer is inside connection
