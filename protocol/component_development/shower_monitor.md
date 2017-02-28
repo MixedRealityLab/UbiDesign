@@ -1,4 +1,4 @@
-# Shower Monoitor
+# Shower Monitor
 ## Components
 
 - 200 * 120 * 75mm  IP65 enclosure
