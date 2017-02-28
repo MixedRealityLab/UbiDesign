@@ -63,5 +63,13 @@ sudo python test_shower_monitor.py
 ```
 then connect to the hub using a web browser on port 8083, select the shower database and query for recent readings
 
+## Comissioning
+
+- The battery should be fully charged and will last a minimum of 15 days from full
+- Place battery in box and connect to the electronics board
+- Place lid onto box and screw down
+- The device should be connected to the participants shower and testing should be completed to ensure correct functionality
+- Be aware of the metal BSP conector attaching to plastic shower outlets and avoid overtightening. Use PTFE tape rather than overtightening to avoid leaks.
+
 
 
