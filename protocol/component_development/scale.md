@@ -22,7 +22,7 @@
 - 3d printed battery compartment lid // STL and inventor file # 4
 - 3d printed calibration base // STL and inventor file # 5
 
-## Procedure
+## Build Procedure
 
 ### Extend the wire on the load cells by 20cm using cores of the white sheathed wire
 
@@ -68,6 +68,21 @@
 - Route battery lead into battery compartment
 
 ### Place scales into shelf
+
+## Testing
+SSH into the hub and run
+``` 
+sudo python test_scale.py 
+
+```
+remove and place items on the scale for 10 seconds then connect to the hub using a web browser on port 8083, select the shower database and query for recent readings
+
+## Comissioning
+- remove battery from battery compartment and fully charge
+- replace battery into compartment and attach to battery wire
+- put battery compartment lid into place and seal
+- perform testing procudure
+- hang shelf basket in shower
 
 
 
