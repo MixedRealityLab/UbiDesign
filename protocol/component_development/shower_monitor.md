@@ -54,14 +54,12 @@
 
 ## Testing
 
-To test you should connect assembled unit to shower oulet via 50mm * 15mm push fit to 0.5" BSP hose and run the shower. If you put the wireless thigns voyager into SRF mode (switch on board for this) then you should be able to connect to this over USB serial at 9600 baud and see the readings from the shower.
-
-Alternatively you can ssh into the hub and run
+SSH into the hub and run
 ``` 
 sudo python test_shower_monitor.py 
 
 ```
-then connect to the hub using a web browser on port 8083, select the shower database and query for recent readings
+run the shower for 10 seconds then connect to the hub using a web browser on port 8083, select the shower database and query for recent readings
 
 ## Comissioning
 
