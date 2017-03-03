@@ -11,7 +11,7 @@ if __name__ == '__main__':
       print("starting thread")
       shower_scale_thread.start()
       print("wait 10 seconds")
-      time.sleep(10)
+      time.sleep(20)
       print("ending thread")
       shower_scale_thread.endBluetooth()
 

@@ -37,7 +37,7 @@ class SerialManager(Thread):
                         self.last_reading = timestamp
                         tag = llapmsg[3:7]
                         value = llapmsg[7:].replace('-','')
-                        dbpost = database_post(tag, value)
+                        dbpost = database_post(tag, value, "monitor")
                         dbpost.start()
                         timestring = timestamp.strftime("%Y-%m-%d %H:%M:%S")
                         with open("/home/jzc/logs/shower.csv", "a") as csvfile: 
