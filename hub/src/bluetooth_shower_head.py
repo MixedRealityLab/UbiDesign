@@ -32,23 +32,16 @@ class bluetoothManager_head(Thread):
                 else :                     
                     input = line[36:].replace(" ", "").strip()
                     buffer += input.decode('hex')
-
                     if(buffer.find('*') > -1) :
                         output = buffer[:buffer.find('*')]
                         selector = output[0];
                         array = output[1:].split(',')
                         if(len(array) == 3) :
                             if(selector == 'a' or selector == 'm' or selector == 'g') :
-                                print(array)
                                 database_post(selector + "x", array[0], "head").start()
                                 database_post(selector + "y", array[1], "head").start()
                                 database_post(selector + "z", array[2], "head").start()
-
-                            
-                        buffer = buffer[buffer.find('*')+1:]
-              
-                        
-                                                  
+                        buffer = buffer[buffer.find('*')+1:]                                          
                 if(self.exit) :
                     print("attempting exit")
                     process.kill()
