@@ -25,7 +25,7 @@ if __name__ == '__main__':
                shower_head_thread = bluetoothManager_head()
                shower_head_thread.start()
                shower_head_running = 1
-            
+               time.sleep(5)
             if(shower_scale_running == 0):       
                shower_scale_thread = bluetoothManager_scale()
                shower_scale_thread.start()

@@ -27,7 +27,7 @@ class bluetoothManager_head(Thread):
             process = subprocess.Popen("exec /usr/bin/gatttool -b C8:32:82:D2:3E:6A -t random --char-write-req -a 0x23 -n 0100 --listen", shell=True, stdout=subprocess.PIPE)
             buffer = ""           
             for line in iter(process.stdout.readline, ''):
-                if (count < 3) : 
+                if (count < 10) : 
                     count = count + 1
                 else :                     
                     input = line[36:].replace(" ", "").strip()

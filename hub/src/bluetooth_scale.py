@@ -24,35 +24,42 @@ class bluetoothManager_scale(Thread):
         try:
             print("started scale")
             count = 0
-            process = subprocess.Popen("exec /usr/bin/gatttool -b EB:3D:C2:2D:A5:F4 -t random --char-write-req -a 0x0025 -n 0100 --listen", shell=True, stdout=subprocess.PIPE)
-            count2 = 0
-            output = ""
-            tare = 0;
+            tare = 0
+            tared = False
+            process = subprocess.Popen("exec /usr/bin/gatttool -b EB:3D:C2:2D:A5:F4 -t random --char-write-req -a 0x23 -n 0100 --listen", shell=True, stdout=subprocess.PIPE)
+            buffer = ""           
             for line in iter(process.stdout.readline, ''):
-                if (count < 3): 
+                if (count < 3) : 
                     count = count + 1
-                elif (count == 3):
-                    output = line[36:].replace(" ", "").strip()
-                    output = output.decode('hex')
-                    output = output.replace(    ",kg,", "")
-                    tare = float(output.rstrip())
-                    count = count + 1
-                    
 
-                else:
-                    output = line[36:].replace(" ", "").strip()
-                    output = output.decode('hex')
-                    output = output.replace(",kg,", "")
-                    value = tare - float(output.rstrip())
-                    tag = "scale"
-                    dbpost = database_post(tag, value, "scale")
-                    dbpost.start()
-                    timestamp = datetime.datetime.now()
-                    timestring = timestamp.strftime("%Y-%m-%d %H:%M:%S")
-                    with open("/home/jzc/logs/scale.csv", "a") as csvfile: 
-                        showerwriter = csv.writer(csvfile, delimiter=',')
-                        showerwriter.writerow([timestring, tag, value])
-                            
+                else :                     
+                    input = line[36:].replace(" ", "").strip()
+                    buffer += input.decode('hex')
+                    if(buffer.find('\n') > -1) :
+                        output = buffer[:buffer.find('\n')]
+                        try:
+                            output = float(output.replace(",kg,", ""))
+                            if(tared == False):
+                                print("taring")
+                                tare = output
+                                print("tared")
+                                tared = True
+                            else: 
+                                value = tare - output
+                                tag = "scale"
+                                dbpost = database_post(tag, value, "scale")
+                                dbpost.start()
+                                timestamp = datetime.datetime.now()
+                                timestring = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+                                with open("/home/jzc/logs/scale.csv", "a") as csvfile: 
+                                    showerwriter = csv.writer(csvfile, delimiter=',')
+                                    showerwriter.writerow([timestring, tag, value])
+                                print(value)
+                        except ValueError as error:
+                            print(repr(error))
+
+                        
+                        buffer = buffer[buffer.find('\n')+1:]                                          
                 if(self.exit) :
                     print("attempting exit")
                     process.kill()
@@ -60,5 +67,7 @@ class bluetoothManager_scale(Thread):
         except Exception as error :
             process.kill()
             print(repr(error))
+
+    
 
     

@@ -10,8 +10,8 @@ if __name__ == '__main__':
       shower_head_thread = bluetoothManager_head()
       print("starting thread")
       shower_head_thread.start()
-      print("wait 10 seconds")
-      time.sleep(15)
+      print("running for 20 seconds")
+      time.sleep(20)
       print("ending thread")
       shower_head_thread.endBluetooth()
 

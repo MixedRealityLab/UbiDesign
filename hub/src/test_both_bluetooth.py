@@ -12,6 +12,7 @@ if __name__ == '__main__':
       shower_scale_thread = bluetoothManager_scale()
       print("starting thread")
       shower_head_thread.start()
+      time.sleep(5)
       shower_scale_thread.start()
       print("wait 10 seconds")
       time.sleep(30)
