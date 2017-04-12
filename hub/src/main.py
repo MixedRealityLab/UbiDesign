@@ -20,13 +20,14 @@ if __name__ == '__main__':
          time.sleep(2)
          timediff = datetime.datetime.now() - serialThread.get_last_reading()
          if (timediff.seconds <= 10):
+            
             if(shower_head_running == 0): 
                shower_head_thread = bluetoothManager_head()
                shower_head_thread.start()
-            
-            if(shower_scale_running == 0):       
                shower_head_running = 1
-               shower_scale_thread = bluetoothManager_head()
+               time.sleep(5)
+            if(shower_scale_running == 0):       
+               shower_scale_thread = bluetoothManager_scale()
                shower_scale_thread.start()
                shower_scale_running = 1
 
@@ -47,10 +48,12 @@ if __name__ == '__main__':
       print("W: interrupt received, stopping")
       serialThread.endSerial()
       shower_head_thread.endBluetooth()
+      shower_scale_thread.endBluetooth()
 
    except Exception as error:
       serialThread.endSerial()
       shower_head_thread.endBluetooth()
+      shower_scale_thread.endBluetooth()
       print(repr(error))
 
    finally:

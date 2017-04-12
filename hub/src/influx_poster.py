@@ -9,25 +9,30 @@ password = 'root'
  
 class database_post(Thread):
  
-    def __init__(self, tag, value):
+    def __init__(self, tag, value, measurement):
         ''' Constructor. '''
         Thread.__init__(self)
         self.tag = tag
         self.value = value
+        self.measurement = measurement
  
     def run(self):
 
-        client = InfluxDBClient(host, port, user, password, dbname)
-        json_body = [
-            {
-                "measurement": "shower",
-                "tags": {
-                    "axis": self.tag
-                },
-                "fields": {
-                    "value": self.value
+        try: 
+            floatValue = float(self.value)
+            client = InfluxDBClient(host, port, user, password, dbname)
+            json_body = [
+                {
+                    "measurement": self.measurement,
+                    "tags": {
+                        "axis": self.tag
+                    },
+                    "fields": {
+                        "value": floatValue
+                    }
                 }
-            }
-        ]
-        client.write_points(json_body)
+            ]
+            client.write_points(json_body)
+        except Exception as error:
+            print(repr(error))
 
