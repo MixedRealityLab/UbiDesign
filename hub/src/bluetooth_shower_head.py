@@ -34,13 +34,20 @@ class bluetoothManager_head(Thread):
                     buffer += input.decode('hex')
                     if(buffer.find('*') > -1) :
                         output = buffer[:buffer.find('*')]
-                        selector = output[0];
+                        selector = output[0]
                         array = output[1:].split(',')
                         if(len(array) == 3) :
                             if(selector == 'a' or selector == 'm' or selector == 'g') :
                                 database_post(selector + "x", array[0], "head").start()
                                 database_post(selector + "y", array[1], "head").start()
                                 database_post(selector + "z", array[2], "head").start()
+                                timestamp = datetime.datetime.now()
+                                timestring = timestamp.strftime("%Y-%m-%d %H:%M:%S:%f")
+                                with open("/home/jzc/logs/head.csv", "a") as csvfile: 
+                                    showerwriter = csv.writer(csvfile, delimiter=',')
+                                    showerwriter.writerow([timestring, selector + "x", array[0]])
+                                    showerwriter.writerow([timestring, selector + "y", array[1]])
+                                    showerwriter.writerow([timestring, selector + "z", array[2]])
                         buffer = buffer[buffer.find('*')+1:]                                          
                 if(self.exit) :
                     print("attempting exit")
