@@ -1,6 +1,8 @@
 from bluetooth_shower_head import bluetoothManager_head
 from bluetooth_scale import bluetoothManager_scale
 from wireless_things import SerialManager
+from influx_poster import database_post
+
 import signal
 import sys
 import time
@@ -21,7 +23,9 @@ if __name__ == '__main__':
          timediff = datetime.datetime.now() - serialThread.get_last_reading()
          if (timediff.seconds <= 10):
             
-            if(shower_head_running == 0): 
+
+            if(shower_head_running == 0):
+               database_post("indicator", 1.0, "startstop").start() 
                shower_head_thread = bluetoothManager_head()
                shower_head_thread.start()
                shower_head_running = 1
@@ -34,9 +38,10 @@ if __name__ == '__main__':
          else :
             
             if (shower_head_running) :
+               database_post("indicator", 0.0, "startstop").start()
                shower_head_thread.endBluetooth()
                shower_head_running = 0
-
+               time.sleep(5)
             if (shower_scale_running) :
                shower_scale_thread.endBluetooth()
                shower_scale_running = 0

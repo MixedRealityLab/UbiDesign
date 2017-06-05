@@ -20,7 +20,7 @@ class SerialManager(Thread):
         return self.last_reading
 
     def run(self):
-
+        # TODO: if the last stop start is a start (i.e. stop is missing) then insert stop
         try: 
             ser = serial.Serial(port=port, baudrate=baud, timeout=2)
             sleep(0.2)
@@ -37,8 +37,7 @@ class SerialManager(Thread):
                         self.last_reading = timestamp
                         tag = llapmsg[3:7]
                         value = llapmsg[7:].replace('-','')
-                        dbpost = database_post(tag, value, "monitor")
-                        dbpost.start()
+                        dbpost = database_post(tag, value, "monitor").start()
                         timestring = timestamp.strftime("%Y-%m-%d %H:%M:%S")
                         with open("/home/jzc/logs/shower.csv", "a") as csvfile: 
                             showerwriter = csv.writer(csvfile, delimiter=',')

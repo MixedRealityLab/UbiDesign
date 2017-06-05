@@ -1,5 +1,6 @@
 
 from wireless_things import SerialManager
+from influx_poster import database_post
 import signal
 import sys
 import time
@@ -21,6 +22,7 @@ if __name__ == '__main__':
             print("shower running")
          else :
             print("shower not running")
+
 
    except KeyboardInterrupt:
       print("W: interrupt received, stopping")
